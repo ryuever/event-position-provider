@@ -2,14 +2,20 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import typescript from 'rollup-plugin-typescript';
+import pkg from './package.json';
 
 export default {
   input: 'index.js',
-  output: {
-    file: 'lib/EventPositionProvider.js',
-    format: 'umd',
-    name: 'EventPositionProvider',
-  },
+  output: [
+		{
+			format: 'es',
+			file: pkg.module
+		},
+		{
+			format: 'cjs',
+			file: pkg.main
+		}
+  ],
   plugins: [
     typescript(),
     resolve(),
