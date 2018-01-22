@@ -25,7 +25,6 @@ class EventPositionProvider extends Emitter {
       allianceNodes,
     } = opts || {};
 
-    this.entry = entry || document.boby;
     this.watchEvent = watchEvent ? [].concat(watchEvent) : ['click'];
 
     this.eventer = new DOMEventer();
@@ -68,9 +67,9 @@ class EventPositionProvider extends Emitter {
     const { isOutside } = this.clickStat;
     const { isOutside: nextIsOutside } = nextStat;
 
-    if (typeof isOutside === 'undefined' || isOutside && !nextIsOutside) this.willFire(nextStat);
-    if (!isOutside && nextIsOutside) this.willDismiss(nextStat);
-    if (typeof isOutside !== 'undefined' && !isOutside && !nextIsOutside) this.onPersistence(nextStat);
+    if (typeof isOutside === 'undefined' || isOutside && !nextIsOutside) return this.willFire(nextStat);
+    if (!isOutside && nextIsOutside) return this.willDismiss(nextStat);
+    if (typeof isOutside !== 'undefined' && !isOutside && !nextIsOutside) return this.onPersistence(nextStat);
 
     this.clickStat = nextStat;
   }
